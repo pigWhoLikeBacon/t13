@@ -1,15 +1,26 @@
 <template>
-  <div class="infinite-list-wrapper" style="overflow:auto">
-    <ul
-      class="list"
-      v-infinite-scroll="load"
-      infinite-scroll-disabled="disabled"
-    >
-      <li v-for="i in count" v-bind:key="i" class="list-item">{{ i }}</li>
-    </ul>
-    <p v-if="loading">加载中...</p>
-    <p v-if="noMore">没有更多了</p>
-  </div>
+  <ul class="list" v-infinite-scroll="load" infinite-scroll-disabled="disabled">
+    <li v-for="i in count" v-bind:key="i" class="list-item">
+      <el-card shadow="hover" :body-style="{ padding: '10px 10px 5px 10px' }">
+        <el-container>
+          <el-aside width="160px">
+            <el-image
+              style="width: 160px; height: 160px"
+              src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+              :fit="'cover'"
+            />
+          </el-aside>
+          <el-main style="padding: 0 0 0 10px">
+            <span
+              >卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽</span
+            >
+          </el-main>
+        </el-container>
+      </el-card>
+    </li>
+  </ul>
+  <p v-if="loading">加载中...</p>
+  <p v-if="noMore">没有更多了</p>
 </template>
 
 <script>
@@ -40,4 +51,15 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.list {
+  padding: 0;
+  list-style: none;
+}
+
+.list-item {
+  display: flex;
+  margin: 10px 0;
+  color: #7dbcfc;
+}
+</style>

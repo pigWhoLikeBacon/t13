@@ -3,14 +3,16 @@
     <el-header>
       <Menu :items="items"></Menu>
     </el-header>
-    <el-container>
-      <el-aside width="25%"></el-aside>
-      <el-main style="background: #81a6ed; width: 300px">
-        <p>hhd</p>
+    <el-container style="margin: 0 auto">
+      <el-main style="padding: 1em 10px 10px 10px">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+        </el-breadcrumb>
         <router-view />
       </el-main>
       <Aside></Aside>
-      <el-aside width="25%"></el-aside>
     </el-container>
     <el-footer>Footer</el-footer>
   </el-container>
@@ -30,22 +32,22 @@ export default {
     return {
       items: [
         {
-          title: 'hhd1',
+          title: "hhd1",
           index: 1,
-          link: '/'
+          link: "/"
         },
         {
-          title: 'hhd2',
+          title: "hhd2",
           index: 2,
-          link: '/'
+          link: "/"
         },
         {
-          title: 'hhd3',
+          title: "hhd3",
           index: 3,
-          link: '/'
+          link: "/"
         }
       ]
-    }
+    };
   }
 };
 </script>
@@ -56,6 +58,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  max-width: 100%;
 }
 
 #nav {
@@ -79,5 +82,13 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
+}
+
+main {
+  max-width: 1000px;
+}
+
+.el-container {
+  max-width: 100%;
 }
 </style>
