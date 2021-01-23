@@ -1,4 +1,9 @@
 <template>
+  <el-breadcrumb separator-class="el-icon-arrow-right">
+    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+    <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+    <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+  </el-breadcrumb>
   <ul class="list" v-infinite-scroll="load" infinite-scroll-disabled="disabled">
     <li v-for="i in count" v-bind:key="i" class="list-item">
       <el-card shadow="hover" :body-style="{ padding: '10px 10px 5px 10px' }">

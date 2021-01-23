@@ -27,6 +27,17 @@ const routes = [
           import("../views/list/index.vue"),
       }
     ]
+  },
+  {
+    path: "/single",
+    component: Layout,
+    children: [
+      {
+        path: '/single',
+        component: () =>
+            import("../views/single/index.vue"),
+      }
+    ]
   }
 ];
 

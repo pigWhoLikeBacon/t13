@@ -1,5 +1,5 @@
 <template>
-  <el-aside width="300px" style="padding: 1em 10px 10px 0">
+  <el-aside width="300px" style="padding: 1em 10px 10px 10px">
     <div style="padding: 0 0 0 10px">
       <el-container>
         <el-aside width="60px">
@@ -20,17 +20,25 @@
       </el-container>
     </div>
     <el-divider style="margin: 10px 0"></el-divider>
-    <div style="height: 100px; width: 100%">
+    <div style="width: 100%">
       <p style="font-size: 18px; margin: 16px 0 16px 0; font-weight: bold">标签</p>
-      <span>hhd </span>
-      <span>hhd </span>
-      <span>hhd </span>
-      <span>hhd </span>
-      <span>hhd </span>
-      <span>hhd </span>
+      <el-space wrap>
+        <el-tag>标签一</el-tag>
+        <el-tag type="success">标签二</el-tag>
+        <el-tag type="info">标签三</el-tag>
+        <el-tag type="warning">标签四</el-tag>
+        <el-tag type="danger">标签五</el-tag>
+        <el-tag>标签一</el-tag>
+        <el-tag type="success">标签二</el-tag>
+        <el-tag type="info">标签三</el-tag>
+        <el-tag type="warning">标签四</el-tag>
+        <el-tag type="danger">标签五</el-tag>
+      </el-space>
     </div>
-    <div style="height: 20px; width: 100%;"></div>
-    <div style="height: 100px; width: 100%;"></div>
+    <el-divider style="margin: 10px 0"></el-divider>
+    <div style="width: 100%">
+      <p style="font-size: 18px; margin: 16px 0 16px 0; font-weight: bold">归档</p>
+    </div>
   </el-aside>
 </template>
 

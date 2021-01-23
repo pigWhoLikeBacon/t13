@@ -5,11 +5,6 @@
     </el-header>
     <el-container style="margin: 0 auto">
       <el-main style="padding: 1em 10px 10px 10px">
-        <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-        </el-breadcrumb>
         <router-view />
       </el-main>
       <Aside></Aside>
@@ -32,19 +27,14 @@ export default {
     return {
       items: [
         {
-          title: "hhd1",
+          title: "首页",
           index: 1,
           link: "/"
         },
         {
-          title: "hhd2",
+          title: "关于",
           index: 2,
-          link: "/"
-        },
-        {
-          title: "hhd3",
-          index: 3,
-          link: "/"
+          link: "/single?id=1"
         }
       ]
     };
