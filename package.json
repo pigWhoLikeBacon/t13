@@ -14,7 +14,8 @@
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0",
     "gitalk": "^1.7.0",
-    "element-plus": "^1.0.1-beta.24"
+    "element-plus": "^1.0.1-beta.24",
+    "axios": "0.21.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
