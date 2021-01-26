@@ -1,7 +1,5 @@
 import axios from "axios";
-// import store from "../store";
 import Config from "@/settings";
-// import Cookies from "js-cookie";
 import { ElNotification } from "element-plus";
 
 // 创建axios实例
