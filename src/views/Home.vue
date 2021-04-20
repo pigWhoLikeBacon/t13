@@ -19,7 +19,8 @@ export default {
     const params = {
       page: 0,
       size: 9999,
-      enabled: true
+      enabled: true,
+      sort: "id,asc"
     };
     console.log(
       request({

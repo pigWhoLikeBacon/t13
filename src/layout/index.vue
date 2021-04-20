@@ -7,7 +7,7 @@
       <el-main style="padding: 1em 10px 10px 10px">
         <router-view />
       </el-main>
-      <Aside></Aside>
+      <Aside :tags="tags" :file="file"></Aside>
     </el-container>
     <el-footer>Footer</el-footer>
   </el-container>
@@ -16,6 +16,8 @@
 <script>
 import Menu from "./menu/index";
 import Aside from "./aside/index";
+import { getAllTag } from "@/api/tag";
+import { getFile } from "@/api/article";
 
 export default {
   name: "Layout",
@@ -36,8 +38,22 @@ export default {
           index: 2,
           link: "/single?id=1"
         }
-      ]
+      ],
+      tags: [],
+      file: {}
     };
+  },
+  mounted() {
+    getAllTag()
+      .then(res => {
+        this.tags = res.content;
+      })
+      .catch(() => {});
+    getFile()
+      .then(res => {
+        this.file = res;
+      })
+      .catch(() => {});
   }
 };
 </script>

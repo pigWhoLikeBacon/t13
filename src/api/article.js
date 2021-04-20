@@ -1,10 +1,6 @@
 import request from "@/utils/request";
 
-export function getArticles(page, size) {
-  const params = {
-    page: page,
-    size: size
-  };
+export function getArticles(params) {
   return request({
     url: "api/article/show",
     method: "get",
@@ -41,6 +37,6 @@ export function getArticlesByTagId(id, page, size) {
 export function getFile() {
   return request({
     url: "api/article/file",
-    method: "get",
+    method: "get"
   });
 }

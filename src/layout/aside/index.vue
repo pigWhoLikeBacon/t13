@@ -9,7 +9,9 @@
             :fit="'cover'"
           />
         </el-aside>
-        <el-main style="padding: 0 0 0 10px; text-align: right; position: relative">
+        <el-main
+          style="padding: 0 0 0 10px; text-align: right; position: relative"
+        >
           <span>爱吃培根的猪</span>
           <div style="position: absolute; right: 0; bottom: 0;">
             <span>QQ</span>
@@ -21,30 +23,60 @@
     </div>
     <el-divider style="margin: 10px 0"></el-divider>
     <div style="width: 100%">
-      <p style="font-size: 18px; margin: 16px 0 16px 0; font-weight: bold">标签</p>
+      <p style="font-size: 18px; margin: 16px 0 16px 0; font-weight: bold">
+        标签
+      </p>
       <el-space wrap>
-        <el-tag>标签一</el-tag>
-        <el-tag type="success">标签二</el-tag>
-        <el-tag type="info">标签三</el-tag>
-        <el-tag type="warning">标签四</el-tag>
-        <el-tag type="danger">标签五</el-tag>
-        <el-tag>标签一</el-tag>
-        <el-tag type="success">标签二</el-tag>
-        <el-tag type="info">标签三</el-tag>
-        <el-tag type="warning">标签四</el-tag>
-        <el-tag type="danger">标签五</el-tag>
+        <router-link
+          v-for="tag in tags"
+          :key="tag.id"
+          :to="{ path: '/list', query: { 'tagId': tag.id } }"
+        >
+          <el-tag :type="tag.color">
+            {{ tag.content }}
+          </el-tag>
+        </router-link>
       </el-space>
     </div>
     <el-divider style="margin: 10px 0"></el-divider>
     <div style="width: 100%">
-      <p style="font-size: 18px; margin: 16px 0 16px 0; font-weight: bold">归档</p>
+      <p style="font-size: 18px; margin: 16px 0 16px 0; font-weight: bold">
+        归档
+      </p>
+      <div v-for="(value, key) in file" :key="key" style="position: relative; margin-bottom: 6px">
+        <router-link
+          :to="{ path: '/', query: { id: 1 } }"
+          style="text-decoration: none"
+        >
+          <el-link style="font-size: 14px">{{ value.year + "年" + value.month + "月" }}</el-link>
+        </router-link>
+        <span
+          style="float: right; font-size: 12px; color: #909399; position: absolute; right: 0; bottom: 0; "
+        >
+          {{ value.num + "篇" }}
+        </span>
+      </div>
     </div>
   </el-aside>
 </template>
 
 <script>
 export default {
-  name: "Aside"
+  name: "Aside",
+  props: {
+    tags: {
+      type: Array,
+      default: function() {
+        return [];
+      }
+    },
+    file: {
+      type: Map,
+      default: function() {
+        return {};
+      }
+    }
+  }
 };
 </script>
 

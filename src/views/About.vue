@@ -18,7 +18,7 @@ export default {
       owner: "pig-who-like-bacon",
       admin: ["pig-who-like-bacon"],
       id: "comment",
-      title: "hhd3",
+      title: "hhd1",
       distractionFreeMode: false // Facebook-like distraction free mode
     });
     gitalk.render("gitalk-container");

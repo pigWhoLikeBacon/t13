@@ -3,42 +3,104 @@
     <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
     <el-breadcrumb-item>活动管理</el-breadcrumb-item>
     <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+    <el-select
+      v-model="value"
+      size="mini"
+      style="float: right"
+      placeholder="请选择"
+    >
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+      >
+      </el-option>
+    </el-select>
   </el-breadcrumb>
-  <ul class="list" v-infinite-scroll="load" infinite-scroll-disabled="disabled">
-    <li v-for="i in count" v-bind:key="i" class="list-item">
-      <el-card shadow="hover" :body-style="{ padding: '10px 10px 5px 10px' }">
-        <el-container>
-          <el-aside width="160px">
-            <el-image
-              style="width: 160px; height: 160px"
-              src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              :fit="'cover'"
-            />
-          </el-aside>
-          <el-main style="padding: 0 0 0 10px">
-            <span
-              >卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽</span
-            >
-          </el-main>
-        </el-container>
-      </el-card>
-    </li>
-  </ul>
+  <div
+    class="infinite-list-wrapper"
+    style="overflow:auto"
+    @scroll="handleScroll"
+  >
+    <ul
+      class="list"
+      v-infinite-scroll="load"
+      infinite-scroll-disabled="disabled"
+    >
+      <li v-for="article in articles" v-bind:key="article.id" class="list-item">
+        <el-card shadow="hover" :body-style="{ padding: '10px 10px 5px 10px' }">
+          <el-container>
+            <el-aside width="160px">
+              <el-image
+                style="width: 160px; height: 160px"
+                src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                :fit="'cover'"
+              />
+            </el-aside>
+            <el-main style="padding: 0 0 0 10px">
+              <span
+                >{{
+                  article.id
+                }}卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽</span
+              >
+            </el-main>
+          </el-container>
+        </el-card>
+      </li>
+    </ul>
+  </div>
+  <p>{{ count }}</p>
+  <p>{{ loading }}</p>
   <p v-if="loading">加载中...</p>
   <p v-if="noMore">没有更多了</p>
 </template>
 
 <script>
+import { getArticles } from "@/api/article";
+
 export default {
   data() {
     return {
-      count: 10,
-      loading: false
+      count: 6,
+      countMax: 14,
+      page: 0,
+      size: 6,
+      loading: false,
+      word: "",
+      articles: [],
+      options: [
+        {
+          value: "id,desc",
+          label: "按时间正序"
+        },
+        {
+          value: "id,asc",
+          label: "按时间逆序"
+        },
+        {
+          value: "views,desc",
+          label: "按访问量正序"
+        },
+        {
+          value: "views,asc",
+          label: "按访问量逆序"
+        }
+      ],
+      value: "id,desc"
     };
+  },
+  mounted() {
+    let _this = this;
+    _this.setArticles();
+
+    this.$nextTick(() => {
+      window.addEventListener("scroll", _this.handleScroll, true);
+    });
   },
   computed: {
     noMore() {
-      return this.count >= 20;
+      return this.count >= this.countMax;
     },
     disabled() {
       return this.loading || this.noMore;
@@ -46,11 +108,45 @@ export default {
   },
   methods: {
     load() {
-      this.loading = true;
-      setTimeout(() => {
-        this.count += 2;
-        this.loading = false;
-      }, 2000);
+      return this.loading;
+    },
+    handleScroll() {
+      //变量scrollTop是滚动条滚动时，距离顶部的距离
+      if (this.noMore == false) {
+        var scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop;
+        //变量windowHeight是可视区的高度
+        var windowHeight =
+          document.documentElement.clientHeight || document.body.clientHeight;
+        //变量scrollHeight是滚动条的总高度
+        var scrollHeight =
+          document.documentElement.scrollHeight || document.body.scrollHeight;
+        //滚动条到底部的条件
+        if (scrollTop + windowHeight == scrollHeight) {
+          //写后台加载数据的函数
+
+          this.loading = true;
+          setTimeout(() => {
+            this.count += this.size;
+            this.loading = false;
+          }, 100);
+        }
+      }
+    },
+    setArticles() {
+      const params = {
+        page: this.page,
+        size: this.size,
+        enabled: true,
+        sort: this.value
+      };
+
+      getArticles(params)
+        .then(res => {
+          this.articles = res.content;
+          this.countMax = res.totalElements;
+        })
+        .catch(() => {});
     }
   }
 };
