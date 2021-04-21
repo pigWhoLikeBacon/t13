@@ -9,7 +9,6 @@
       </el-main>
       <Aside :tags="tags" :file="file"></Aside>
     </el-container>
-    <el-footer>Footer</el-footer>
   </el-container>
 </template>
 

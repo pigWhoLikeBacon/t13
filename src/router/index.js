@@ -29,6 +29,17 @@ const routes = [
     ]
   },
   {
+    path: "/search/:id",
+    component: Layout,
+    children: [
+      {
+        path: '/search/:id',
+        component: () =>
+            import("../views/list/search.vue"),
+      }
+    ]
+  },
+  {
     path: "/single",
     component: Layout,
     children: [

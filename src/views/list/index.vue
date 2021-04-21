@@ -1,22 +1,27 @@
 <template>
   <el-breadcrumb separator-class="el-icon-arrow-right">
     <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-    <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-    <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-    <el-select
-      v-model="value"
-      size="mini"
-      style="float: right"
-      placeholder="请选择"
-    >
-      <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
+    <el-breadcrumb-item>文章</el-breadcrumb-item>
+    <el-breadcrumb-item
+      v-for="title in titles" v-bind:key="title"
+    >{{ title }}</el-breadcrumb-item>
+    <div>
+      <span class="el-breadcrumb__inner" role="link">{{ word }}</span>
+      <el-select
+        v-model="value"
+        size="mini"
+        style="float: right"
+        placeholder="请选择"
       >
-      </el-option>
-    </el-select>
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        >
+        </el-option>
+      </el-select>
+    </div>
   </el-breadcrumb>
   <div
     class="infinite-list-wrapper"
@@ -60,6 +65,7 @@
 import { getArticles } from "@/api/article";
 
 export default {
+  name: "list",
   data() {
     return {
       count: 6,
@@ -67,7 +73,6 @@ export default {
       page: 0,
       size: 6,
       loading: false,
-      word: "",
       articles: [],
       options: [
         {
@@ -90,13 +95,40 @@ export default {
       value: "id,desc"
     };
   },
-  mounted() {
+  props: {
+    blurry: {
+      type: String,
+      default: function() {
+        return "";
+      }
+    },
+    titles: {
+      type: Array,
+      default: function() {
+        return [];
+      }
+    },
+    word: {
+      type: String,
+      default: function() {
+        return "全部";
+      }
+    }
+  },
+  async mounted() {
     let _this = this;
-    _this.setArticles();
+    _this.articles = await _this.getAPage();
 
     this.$nextTick(() => {
       window.addEventListener("scroll", _this.handleScroll, true);
     });
+  },
+  watch: {
+    async value() {
+      this.page = 0;
+      this.count = 6;
+      this.articles = await this.getAPage();
+    }
   },
   computed: {
     noMore() {
@@ -110,7 +142,7 @@ export default {
     load() {
       return this.loading;
     },
-    handleScroll() {
+    async handleScroll() {
       //变量scrollTop是滚动条滚动时，距离顶部的距离
       if (this.noMore == false) {
         var scrollTop =
@@ -124,6 +156,8 @@ export default {
         //滚动条到底部的条件
         if (scrollTop + windowHeight == scrollHeight) {
           //写后台加载数据的函数
+          this.page += 1;
+          this.articles = this.articles.concat(await this.getAPage());
 
           this.loading = true;
           setTimeout(() => {
@@ -133,20 +167,24 @@ export default {
         }
       }
     },
-    setArticles() {
+    async getAPage() {
+      var articles = [];
       const params = {
         page: this.page,
         size: this.size,
+        blurry: this.blurry,
         enabled: true,
         sort: this.value
       };
 
-      getArticles(params)
+      await getArticles(params)
         .then(res => {
-          this.articles = res.content;
+          articles = res.content;
           this.countMax = res.totalElements;
         })
         .catch(() => {});
+
+      return articles;
     }
   }
 };
