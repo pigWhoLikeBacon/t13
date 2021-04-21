@@ -34,21 +34,19 @@
       infinite-scroll-disabled="disabled"
     >
       <li v-for="article in articles" v-bind:key="article.id" class="list-item">
-        <el-card shadow="hover" :body-style="{ padding: '10px 10px 5px 10px' }">
+        <el-card shadow="hover" style="width: 100%;" :body-style="{ padding: '10px 10px 5px 10px' }">
           <el-container>
             <el-aside width="160px">
               <el-image
                 style="width: 160px; height: 160px"
-                src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                :src="baseURL + article.cover"
                 :fit="'cover'"
               />
             </el-aside>
             <el-main style="padding: 0 0 0 10px">
-              <span
-                >{{
-                  article.id
-                }}卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽卧了个槽</span
-              >
+              <span>{{ article.title }}<br><br></span>
+              <span>{{ article.createTime }}<br><br></span>
+              <span>{{ article.id }}{{ article.introduce }}</span>
             </el-main>
           </el-container>
         </el-card>
@@ -63,6 +61,7 @@
 
 <script>
 import { getArticles } from "@/api/article";
+import Config from "@/settings";
 
 export default {
   name: "list",
@@ -92,7 +91,8 @@ export default {
           label: "按访问量逆序"
         }
       ],
-      value: "id,desc"
+      value: "id,desc",
+      baseURL: Config.baseURL,
     };
   },
   props: {

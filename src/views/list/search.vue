@@ -15,9 +15,6 @@ export default {
     return {
       titles: ["搜索"]
     };
-  },
-  mounted() {
-    console.log("show", this.$route.params);
   }
 };
 </script>

@@ -2,7 +2,7 @@
   <el-drawer v-model="drawer" direction="ltr" :with-header="false">
     <el-menu :default-active="1">
       <el-menu-item>
-        <el-input v-model="input" placeholder="请输入内容"></el-input>
+        <el-input v-model="input" placeholder="请输入内容" @keyup.enter="search"></el-input>
       </el-menu-item>
       <el-menu-item
           v-for="item in items"
@@ -22,7 +22,7 @@
       {{item.title}}
     </el-menu-item>
     <el-menu-item style="float: right">
-      <el-input v-model="input" placeholder="请输入内容"></el-input>
+      <el-input v-model="input" placeholder="请输入内容" @keyup.enter="search"></el-input>
     </el-menu-item>
   </el-menu>
   <el-menu
@@ -59,7 +59,12 @@ export default defineComponent({
         return [];
       }
     }
-  }
+  },
+  methods: {
+    search() {
+      this.$router.push(({path:"/search/" + this.input}))
+    }
+  },
 });
 </script>
 

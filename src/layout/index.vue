@@ -4,7 +4,7 @@
       <Menu :items="items"></Menu>
     </el-header>
     <el-container style="margin: 0 auto">
-      <el-main style="padding: 1em 10px 10px 10px">
+      <el-main style="padding: 1em 10px 10px 10px;min-width: 448px">
         <router-view />
       </el-main>
       <Aside :tags="tags" :file="file"></Aside>
