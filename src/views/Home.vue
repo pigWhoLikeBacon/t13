@@ -1,12 +1,14 @@
 <template>
-  <div style="width: 100%; height: 200px"></div>
   <div class="home">
-    <img style="width: 300px; max-width: 30%" src="../assets/logo.png" />
-    <h1>Welcome to My Blog</h1>
-  </div>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <div style="width: 100%; height: 200px"></div>
+    <div>
+      <img style="width: 200px; max-width: 30%" src="../assets/logo.png" />
+      <h1>Welcome to My Blog</h1>
+    </div>
+    <div class="home-nav">
+      <router-link to="/list">文章</router-link> |
+      <router-link to="/single/1">关于</router-link>
+    </div>
   </div>
 </template>
 
@@ -17,7 +19,8 @@ export default {
 </script>
 
 <style lang="scss">
-#app {
+
+.home {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -25,16 +28,13 @@ export default {
   color: #2c3e50;
 }
 
-#nav {
+.home-nav {
   padding: 30px;
 
   a {
+    color: #81a6ed;
+    text-decoration: none;
     font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
   }
 }
 </style>

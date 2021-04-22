@@ -40,11 +40,33 @@ const routes = [
     ]
   },
   {
-    path: "/single",
+    path: "/tag/:id",
     component: Layout,
     children: [
       {
-        path: '/single',
+        path: '/tag/:id',
+        component: () =>
+            import("../views/list/tag.vue"),
+      }
+    ]
+  },
+  {
+    path: "/file/:id",
+    component: Layout,
+    children: [
+      {
+        path: '/file/:id',
+        component: () =>
+            import("../views/list/file.vue"),
+      }
+    ]
+  },
+  {
+    path: "/single/:id",
+    component: Layout,
+    children: [
+      {
+        path: '/single/:id',
         component: () =>
             import("../views/single/index.vue"),
       }

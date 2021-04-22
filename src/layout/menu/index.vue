@@ -1,28 +1,38 @@
 <template>
   <el-drawer v-model="drawer" direction="ltr" :with-header="false">
-    <el-menu :default-active="1">
+    <el-menu :default-active="$route.path">
       <el-menu-item>
-        <el-input v-model="input" placeholder="请输入内容" @keyup.enter="search"></el-input>
+        <el-input
+          v-model="input"
+          placeholder="请输入内容"
+          @keyup.enter="search"
+        ></el-input>
       </el-menu-item>
       <el-menu-item
-          v-for="item in items"
-          :index="item.index"
-          :key="item.index"
+        v-for="item in items"
+        :index="item.link"
+        :key="item.link"
+        @click="go(item.link)"
       >
-        {{item.title}}
+        {{ item.title }}
       </el-menu-item>
     </el-menu>
   </el-drawer>
-  <el-menu :default-active="1" class="el-menu-pc" mode="horizontal">
+  <el-menu :default-active="$route.path" class="el-menu-pc" mode="horizontal">
     <el-menu-item
-        v-for="item in items"
-        :index="item.index"
-        :key="item.index"
+      v-for="item in items"
+      :index="item.link"
+      :key="item.link"
+      @click="go(item.link)"
     >
-      {{item.title}}
+      {{ item.title }}
     </el-menu-item>
     <el-menu-item style="float: right">
-      <el-input v-model="input" placeholder="请输入内容" @keyup.enter="search"></el-input>
+      <el-input
+        v-model="input"
+        placeholder="请输入内容"
+        @keyup.enter="search"
+      ></el-input>
     </el-menu-item>
   </el-menu>
   <el-menu
@@ -62,9 +72,13 @@ export default defineComponent({
   },
   methods: {
     search() {
-      this.$router.push(({path:"/search/" + this.input}))
+      this.$router.push({ path: `/search/${this.input}` });
+    },
+    go(path) {
+      console.log("hhd");
+      this.$router.push({ path: path });
     }
-  },
+  }
 });
 </script>
 

@@ -26,17 +26,7 @@
       <p style="font-size: 18px; margin: 16px 0 16px 0; font-weight: bold">
         标签
       </p>
-      <el-space wrap>
-        <router-link
-          v-for="tag in tags"
-          :key="tag.id"
-          :to="{ path: '/list', query: { 'tagId': tag.id } }"
-        >
-          <el-tag :type="tag.color">
-            {{ tag.content }}
-          </el-tag>
-        </router-link>
-      </el-space>
+      <Tags :tags="tags"></Tags>
     </div>
     <el-divider style="margin: 10px 0"></el-divider>
     <div style="width: 100%">
@@ -45,7 +35,7 @@
       </p>
       <div v-for="(value, key) in file" :key="key" style="position: relative; margin-bottom: 6px">
         <router-link
-          :to="{ path: '/', query: { id: 1 } }"
+          :to="{ path: `/file/${key}` }"
           style="text-decoration: none"
         >
           <el-link style="font-size: 14px">{{ value.year + "年" + value.month + "月" }}</el-link>
@@ -61,8 +51,10 @@
 </template>
 
 <script>
+import Tags from "@/components/tags";
 export default {
   name: "Aside",
+  components: {Tags},
   props: {
     tags: {
       type: Array,

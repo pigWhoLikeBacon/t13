@@ -4,6 +4,10 @@ export function getArticles(params) {
   return request({
     url: "api/article/show",
     method: "get",
+    //允许多个key相同的参数
+    paramsSerializer: function(params) {
+      return require('qs').stringify(params, {arrayFormat: 'repeat'})
+    },
     params
   });
 }

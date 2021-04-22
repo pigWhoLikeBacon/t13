@@ -6,29 +6,13 @@
       fit="cover"
     ></el-image>
     <div style="padding: 14px;">
-      <span>好吃的汉堡</span>
-      <span>好吃的汉堡</span>
-      <span>好吃的汉堡</span>
-      <span>好吃的汉堡</span>
-      <span>好吃的汉堡</span>
-      <span>好吃的汉堡</span>
-      <span>好吃的汉堡</span>
-      <span>好吃的汉堡</span>
-      <span>好吃的汉堡</span>
-      <span>好吃的汉堡</span>
-      <span>好吃的汉堡</span>
-      <span>好吃的汉堡</span>
-      <span>好吃的汉堡</span>
-      <span>好吃的汉堡</span>
-      <span>好吃的汉堡</span>
-      <span>好吃的汉堡</span>
-      <span>好吃的汉堡</span>
-      <span>好吃的汉堡</span>
-      <span>好吃的汉堡</span>
-      <div class="bottom clearfix">
-        <time class="time">{{ currentDate }}</time>
-        <el-button type="text" class="button">操作按钮</el-button>
-      </div>
+      <span>{{ article.title }}</span><br /><br />
+      <i class="el-icon-date"></i>
+      <span>{{ getData(article.createTime) }}</span>
+      <i class="el-icon-view"></i>
+      <span>{{ article.view }}</span><br /><br />
+      <Tags :tags="article.tags"></Tags>
+      {{article.content}}
     </div>
   </el-card>
   <Comment></Comment>
@@ -36,11 +20,29 @@
 
 <script>
 import Comment from "@/views/single/module/Comment";
+import { getArticle } from "@/api/article";
 export default {
-  name: "index",
   components: {
     Comment
   },
+  data() {
+    return {
+      article: {}
+    };
+  },
+  mounted() {
+    getArticle(this.$route.params.id)
+      .then(res => {
+        this.article = res.content[0];
+      })
+      .catch(() => {});
+  },
+  methods: {
+    getData(format) {
+      var data = new Date(parseInt(format));
+      return data.getFullYear() + "-" + (data.getMonth() + 1) + "-" + data.getUTCDate();
+    }
+  }
 };
 </script>
 

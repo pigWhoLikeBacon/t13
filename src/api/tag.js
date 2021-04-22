@@ -11,3 +11,16 @@ export function getAllTag() {
     params
   });
 }
+
+export function getTagById(id) {
+  const params = {
+    id: id,
+    page: 0,
+    size: 1
+  };
+  return request({
+    url: "api/tag/show",
+    method: "get",
+    params
+  });
+}

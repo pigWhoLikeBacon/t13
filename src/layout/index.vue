@@ -5,7 +5,7 @@
     </el-header>
     <el-container style="margin: 0 auto">
       <el-main style="padding: 1em 10px 10px 10px;min-width: 448px">
-        <router-view />
+        <router-view/>
       </el-main>
       <Aside :tags="tags" :file="file"></Aside>
     </el-container>
@@ -29,13 +29,15 @@ export default {
       items: [
         {
           title: "首页",
-          index: 1,
           link: "/"
         },
         {
+          title: "文章",
+          link: "/list"
+        },
+        {
           title: "关于",
-          index: 2,
-          link: "/single?id=1"
+          link: "/single/1"
         }
       ],
       tags: [],
