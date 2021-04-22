@@ -10,7 +10,7 @@
       <i class="el-icon-date"></i>
       <span>{{ getData(article.createTime) }}</span>
       <i class="el-icon-view"></i>
-      <span>{{ article.view }}</span><br /><br />
+      <span>{{ article.views }}</span><br /><br />
       <Tags :tags="article.tags"></Tags>
       {{article.content}}
     </div>
