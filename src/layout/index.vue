@@ -4,7 +4,7 @@
       <Menu :items="items"></Menu>
     </el-header>
     <el-container style="margin: 0 auto">
-      <el-main style="padding: 1em 10px 10px 10px;min-width: 448px">
+      <el-main>
         <router-view/>
       </el-main>
       <Aside :tags="tags" :file="file"></Aside>
@@ -96,6 +96,19 @@ main {
 }
 
 .el-container {
-  max-width: 100%;
+  max-width: 100% !important;
+  min-width: 1300px !important;
+}
+
+.el-main {
+  padding: 1em 10px 10px 10px;
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .el-container {
+    max-width: 100% !important;
+    min-width: 100% !important;
+  }
 }
 </style>

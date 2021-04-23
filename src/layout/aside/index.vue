@@ -72,4 +72,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+@media (max-width: 767px) {
+  .el-aside {
+    display: none;
+  }
+}
+</style>

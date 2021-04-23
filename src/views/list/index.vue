@@ -2,15 +2,14 @@
   <el-breadcrumb separator-class="el-icon-arrow-right">
     <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
     <el-breadcrumb-item>文章</el-breadcrumb-item>
-    <el-breadcrumb-item v-for="title in titles" v-bind:key="title">{{
-      title
-    }}</el-breadcrumb-item>
+    <el-breadcrumb-item v-for="title in titles" v-bind:key="title">
+      {{ title }}</el-breadcrumb-item>
     <div>
       <span class="el-breadcrumb__inner" role="link">{{ word }}</span>
       <el-select
         v-model="value"
         size="mini"
-        style="float: right"
+        style="float: right;width: 120px"
         placeholder="请选择"
       >
         <el-option
@@ -44,10 +43,10 @@
             style="text-decoration: none;color: #1b1f23"
           >
             <el-container>
-              <el-aside width="160px">
+              <el-aside width="200px">
                 <el-image
-                  style="width: 160px; height: 160px"
-                  :src="baseURL + article.cover"
+                  style="width: 200px; height: 200px"
+                  :src="article.cover"
                   :fit="'cover'"
                 />
               </el-aside>
@@ -69,8 +68,6 @@
       </li>
     </ul>
   </div>
-  <p>{{ count }}</p>
-  <p>{{ loading }}</p>
   <p v-if="loading">加载中...</p>
   <p v-if="noMore">没有更多了</p>
 </template>
@@ -209,8 +206,6 @@ export default {
         sort: this.value
       };
 
-      console.log(this.file);
-
       if (this.blurry !== "") {
         params["blurry"] = this.blurry;
       } else if (this.tagId !== -1) {
@@ -257,5 +252,9 @@ export default {
   display: flex;
   margin: 10px 0;
   color: #7dbcfc;
+}
+
+@media (max-width: 767px) {
+
 }
 </style>

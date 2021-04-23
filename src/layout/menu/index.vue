@@ -1,5 +1,5 @@
 <template>
-  <el-drawer v-model="drawer" direction="ltr" :with-header="false">
+  <el-drawer v-model="drawer" direction="ltr" :with-header="false" size="70%">
     <el-menu :default-active="$route.path">
       <el-menu-item>
         <el-input
@@ -75,7 +75,6 @@ export default defineComponent({
       this.$router.push({ path: `/search/${this.input}` });
     },
     go(path) {
-      console.log("hhd");
       this.$router.push({ path: path });
     }
   }
@@ -83,6 +82,16 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.el-drawer {
+  width: 300px;
+  min-width: 60%;
+}
+
+.el-drawer.ltr {
+  width: 300px;
+  min-width: 60%;
+}
+
 .el-menu-pc {
   display: block;
 }

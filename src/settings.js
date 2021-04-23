@@ -2,7 +2,7 @@ module.exports = {
   /**
    * @description 接口地址
    */
-  baseURL: "http://192.168.3.92:8000",
+  baseURL: "http://192.168.3.93:8000",
   /**
    * @description 网站标题
    */
